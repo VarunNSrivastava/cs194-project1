@@ -1,4 +1,35 @@
-# this is me checking if markdown works
+<!doctype html>
+<html>
+<head>
+	<title>HTML Editor - Full Version</title>
+</head>
+<body class="vsc-initialized">
+<h1 style="font-weight: 400; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;;">CS194-26 Project 1</h1>
 
-![Sicherung vorbereiten](/lib/monastery.jpeg)
-* this is a very pretty picture *
+<h2 style="font-weight: 400; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;;">Overview</h2>
+
+<p style="color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;; font-size: 13px;"><span style="font-size:14px;">Given the&nbsp;<a href="https://inst.eecs.berkeley.edu/~cs194-26/fa22/hw/proj1/data/" style="color: rgb(7, 130, 193);">works</a>&nbsp;of Sergei Mikhailovich Prokudin-Gorskii, I have been tasked to reproduce several of his photographs in color.&nbsp;</span></p>
+
+<h2 style="font-weight: 400; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;;">Approach</h2>
+
+<p>My approach to align the three images was to&nbsp;identify a &quot;center&quot; pixel for each image, and line them up according to this center pixel. After each image was lined up, they would be cropped to have the same size. The center pixel for the topmost image was chosen arbitrarily, and the centers for the other images was determined by finding which&nbsp;center pixel maximized the Normalized Cross Correlation (NCC) metric.&nbsp;</p>
+
+<p>The search space for the center pixels was a lattice centered near the middle of each individual image, which would increase in fineness over multiple iterations. The combination of a grid search with continually increasing the resolution of the image over iterations is a technique known as<a href="https://en.wikipedia.org/wiki/Pyramid_(image_processing)"> The Pyramid</a>.&nbsp;</p>
+
+<p>Remark: while my approach of finding centers is functionally similar as&nbsp;calculating &quot;shifts&quot; for NumPy&#39;s roll function, I avoided that approach to make it easier to compare cropped images with NCC.</p>
+
+<h2 style="font-weight: 400; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;;">Results</h2>
+
+<p>&nbsp;</p>
+
+<h2 style="font-weight: 400; line-height: 1.2; color: rgb(51, 51, 51); font-family: sans-serif, Arial, Verdana, &quot;trebuchet ms&quot;;">Remarks</h2>
+
+<p>Some images caused problems. For example, the&nbsp;center of the bottom (red channel) image of emir converges incorrectly when resolution is initialized too coarsely. In particular, it took some experimentation to find what coarseness to initialize the Pyramid Search. Eventually, I settled on starting resolution as a function of image width, particularly the following:</p>
+
+<p style="text-align: center;">res = 1 / (10 + 0.014 * width)&nbsp;</p>
+
+<p>This is fairly arbitrary, but a&nbsp;wide range of initial values seems to work.</p>
+
+<p>&nbsp;</p>
+</body>
+</html>
