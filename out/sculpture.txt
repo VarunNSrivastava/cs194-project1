@@ -1,0 +1,8 @@
+Aligning time was 28.25490713119507 seconds.
+Red center is (8002, 1927). 
+ Green center is (4852, 1910). 
+ Blue center is (1628, 1900).
+NCC scores: 
+ blue and red: 0.8568442672563388
+red and and green: 0.9092048617057309
+green and and blue: 0.9282162728958909
